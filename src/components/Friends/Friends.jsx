@@ -1,16 +1,24 @@
+import React from 'react';
+import styles from './Friends.module.css';
+
 export default function Friends({ friends }) {
+  const getStatusColor = (isOnline) => {
+    return isOnline ? styles.connected : styles.disconnected;
+  };
+
   return (
-    <ul className="friend-list">
-      {friends.map(friend => (
-        <li className="friend">
-          <span className="status">{friends.isOnline}</span>
+    <ul className={styles['friend-list']}>
+      {friends.map((friend) => (
+        <li className={styles.friend}>
+          <span
+            className={`${styles.status} ${getStatusColor(friend.isOnline)}`}
+          ></span>
           <img
-            className="avatar"
+            className={styles.avatar}
             src={friend.avatar}
             alt="User avatar"
-            width="48"
           />
-          <p className="name">{friend.name}</p>
+          <p className={styles.name}>{friend.name}</p>
         </li>
       ))}
     </ul>
